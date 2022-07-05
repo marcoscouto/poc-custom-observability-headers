@@ -23,7 +23,7 @@ public class ObservabilityController {
         var response = new HashMap();
         response.put("trace-id", tracer.currentSpan().context().traceId()); // trace id
         response.put("span-id", tracer.currentSpan().context().spanId()); // new span id
-        response.put("parent-id", tracer.currentSpan().context().parentId()); // Parent span id
+        response.put("parent-id", tracer.currentSpan().context().parentId()); // parent span id
         return ResponseEntity.ok(response);
     }
 

@@ -25,7 +25,6 @@ class CustomPropagator extends Propagation.Factory implements Propagation<String
         return (traceContext, request) -> {
             setter.put(request, "trace-id", traceContext.traceIdString());
             setter.put(request, "span-id", traceContext.spanIdString());
-            setter.put(request, "parent-id", traceContext.parentIdString());
         };
     }
 
@@ -37,10 +36,7 @@ class CustomPropagator extends Propagation.Factory implements Propagation<String
                 ))
                 .spanId(HexCodec.lowerHexToUnsignedLong(
                         Optional.ofNullable(getter.get(request, "span-id")).orElse(UUID.randomUUID().toString().substring(0, 7))
-                )).parentId(HexCodec.lowerHexToUnsignedLong(
-                        Optional.ofNullable(getter.get(request, "parent-id")).orElse(UUID.randomUUID().toString().substring(0, 7))
-                ))
-                .build());
+                )).build());
     }
 
     @Override
